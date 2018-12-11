@@ -6,8 +6,8 @@ var questions_array = [];
 shuffle_array(id);
 
 for (var i=0; i<8; i++){
-new_7_id = id.filter(n => n !== id[i]);
-new_4_id = random_extract(new_7_id, 3);
+new_id_array = id.filter(n => n !== id[i]);
+new_4_id = random_extract(new_id_array, 3);
 new_4_id.push(id[i]);
 shuffle_array(new_4_id);
 problem_set[i] = new_4_id;
@@ -26,7 +26,7 @@ for (var i=0; i<8; i++){
             answer: answer_set[i]
         };
     }
-console.log(questions_array)
+console.log(questions_array);
 
 new Vue({
     el: '#app',
@@ -35,6 +35,7 @@ new Vue({
         answers: [],
         questionIndex: 0,
         correctCount: 0,
+        num_questions: 0,
         questions: questions_array,
     },
 
@@ -60,8 +61,13 @@ new Vue({
         currentQuestion: function() {
             return this.questions[this.questionIndex];
         },
+
         completed: function() {
             return (this.questions.length == this.answers.length);
+        },
+
+        init_or_not: function(){
+            return false;
         }
     }
 })
